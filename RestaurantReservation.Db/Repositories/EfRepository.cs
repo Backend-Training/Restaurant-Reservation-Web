@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace RestaurantReservation.Db.Repositories;
 
 public class EfRepository<T> : IRepository<T> where T : class
