@@ -4,10 +4,10 @@ namespace RestaurantReservation.Db.Repositories;
 
 public class EfRepository<T> : IRepository<T> where T : class
 {
-    private readonly DbContext _context;
+    private readonly RestaurantReservationDbContext  _context;
     private readonly DbSet<T> _dbSet;
 
-    public EfRepository(DbContext context)
+    public EfRepository(RestaurantReservationDbContext  context)
     {
         _context = context;
         _dbSet = _context.Set<T>();
