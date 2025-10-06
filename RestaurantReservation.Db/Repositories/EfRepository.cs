@@ -35,7 +35,7 @@ public class EfRepository<T> : IRepository<T> where T : class
     
     public IQueryable<T> Entities()
     {
-        return _dbSet.AsQueryable();
+        return _dbSet.AsNoTracking().AsQueryable();
     }   
     
 }

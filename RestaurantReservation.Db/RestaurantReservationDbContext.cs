@@ -15,13 +15,17 @@ public class RestaurantReservationDbContext : DbContext
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Table> Tables { get; set; }
     public DbSet<Restaurant> Restaurants { get; set; }
-    
+
     public DbSet<ReservationDetail> ReservationDetails { get; set; }
     public DbSet<EmployeeDetail> EmployeeDetails { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(
-            "Server=DESKTOP-7N1E1DT;Database=RestaurantReservationCore;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer(
+                "Server=DESKTOP-7N1E1DT;Database=RestaurantReservationCore;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,7 +36,7 @@ public class RestaurantReservationDbContext : DbContext
         modelBuilder
             .HasDbFunction(() => RestaurantReservationsExtensions.CalculateRestaurantRevenue(default))
             .HasName("CalculateRestaurantRevenue");
-        
+
         modelBuilder.Entity<Restaurant>().HasData(
             new Restaurant
             {
@@ -171,7 +175,7 @@ public class RestaurantReservationDbContext : DbContext
                 TotalAmount = 50
             }
         );
-        
+
         modelBuilder.Entity<OrderItem>().HasData(
             new OrderItem { OrderItemId = 1, OrderId = 1, MenuItemId = 1, Quantity = 2 },
             new OrderItem { OrderItemId = 2, OrderId = 2, MenuItemId = 2, Quantity = 1 },
