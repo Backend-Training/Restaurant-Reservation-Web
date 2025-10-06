@@ -18,7 +18,8 @@ public class RestaurantReservationDbContext : DbContext
 
     public DbSet<ReservationDetail> ReservationDetails { get; set; }
     public DbSet<EmployeeDetail> EmployeeDetails { get; set; }
-
+    public RestaurantReservationDbContext(DbContextOptions<RestaurantReservationDbContext> options)
+        : base(options) { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
