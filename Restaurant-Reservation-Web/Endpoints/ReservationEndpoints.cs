@@ -7,7 +7,7 @@ namespace Restaurant_Reservation_Web.Endpoints;
 
 public static class ReservationEndpoints
 {
-    public static void MapEndPoints(this WebApplication app)
+    public static void MapReservationsEndPoints(this WebApplication app)
     {
         app.MapGet("/reservations/", async (IReservationService reservationService) =>
         {
