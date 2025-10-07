@@ -20,10 +20,12 @@ builder.Services.AddScoped<IRepository<Employee>, EfRepository<Employee>>();
 
 builder.Services.AddScoped<IRepository<Order>, EfRepository<Order>>();
 
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+
 var app = builder.Build();
 
 app.MapReservationsEndPoints();
 app.MapEmployeeEndpoints();
-
+app.MapCustomerEndpoints();
 
 app.Run();

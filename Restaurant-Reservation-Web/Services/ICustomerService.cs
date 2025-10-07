@@ -4,5 +4,5 @@ namespace Restaurant_Reservation_Web.Services;
 
 public interface ICustomerService
 {
-    Task<ReservationReadDto> ListReservationByCustomer(int id);
+    Task<List<ReservationReadDto>> ListReservationByCustomer(int id);
 }
