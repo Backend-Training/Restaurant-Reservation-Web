@@ -10,10 +10,12 @@ public static class ReservationEndpoints
     public static void MapReservationsEndPoints(this WebApplication app)
     {
         app.MapGet("/reservations/", async (IReservationService reservationService) =>
-        {
-            var reservations = await reservationService.GetAllAsync();
-            return Results.Ok(reservations.ToList());
-        });
+            {
+                var reservations = await reservationService.GetAllAsync();
+                return Results.Ok(reservations.ToList());
+            })
+            .WithName("Get Reservations");
+        
         app.MapGet("/reservations/{id:int}", async (int id, IReservationService reservationService) =>
         {
             var reservation = await reservationService.GetOneAsync(id);
