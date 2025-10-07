@@ -15,8 +15,13 @@ builder.Services.AddDbContext<RestaurantReservationDbContext>(options =>
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IRepository<Reservation>, EfRepository<Reservation>>();
 
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IRepository<Employee>, EfRepository<Employee>>();
+
 var app = builder.Build();
 
 app.MapReservationsEndPoints();
+app.MapEmployeeEndpoints();
+
 
 app.Run();
