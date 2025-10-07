@@ -23,17 +23,17 @@ public static class ReservationEndpoints
         {
             var reservatrion = await reservationService.CreateAsync(reservationDto);
             return Results.Ok(reservatrion);
-        });
+        }).RequireAuthorization();
         app.MapDelete("/reservations/{id:int}", async (int id, IReservationService reservationService) =>
         {
             var result = await reservationService.DeleteAsync(id);
             return result == true ? Results.Ok(result) : Results.NotFound();
-        });
+        }).RequireAuthorization();
         app.MapPut("/reservations/{id:int}",
             async (int id, ReservationDto reservationDto, IReservationService reservationService) =>
             {
                 var result = await reservationService.UpdateAsync(id, reservationDto);
                 return result == true ? Results.Ok(result) : Results.NotFound();
-            });
+            }).RequireAuthorization();
     }
 }
