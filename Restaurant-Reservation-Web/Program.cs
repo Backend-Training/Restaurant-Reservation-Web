@@ -9,6 +9,9 @@ using RestaurantReservation.Db.Models;
 using RestaurantReservation.Db.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+var authService = new AuthService(builder);
+authService.Configure();
+
 builder.Services.AddDbContext<RestaurantReservationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -33,5 +36,6 @@ app.MapEmployeeEndpoints();
 app.MapCustomerEndpoints();
 app.MapOrderEndpoints();
 app.MapMenuItemsEndpoints();
+app.MapTokenEndpoints(builder.Configuration["JWT:secertKey"]);
 
 app.Run();

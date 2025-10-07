@@ -17,7 +17,7 @@ public class JwtTokenGenerator : IToken
         _options = options;
     }
 
-    public string GenerateToken(string username, string password)
+    public string GenerateToken(string username)
     {
         var key = Encoding.ASCII.GetBytes(_secertKey);
         var tokenDescriptor = new SecurityTokenDescriptor
