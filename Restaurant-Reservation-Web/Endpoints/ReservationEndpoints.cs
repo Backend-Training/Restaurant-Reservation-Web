@@ -21,8 +21,15 @@ public static class ReservationEndpoints
         });
         app.MapPost("/reservations", async (ReservationDto reservationDto, IReservationService reservationService) =>
         {
-            var reservatrion = await reservationService.CreateAsync(reservationDto);
-            return Results.Ok(reservatrion);
+            try
+            {
+                var reservatrion = await reservationService.CreateAsync(reservationDto);
+                return Results.Ok(reservatrion);
+            }
+            catch (FluentValidation.ValidationException ex)
+            {
+                return Results.BadRequest(ex.Errors);
+            }
         }).RequireAuthorization();
         app.MapDelete("/reservations/{id:int}", async (int id, IReservationService reservationService) =>
         {
@@ -32,8 +39,15 @@ public static class ReservationEndpoints
         app.MapPut("/reservations/{id:int}",
             async (int id, ReservationDto reservationDto, IReservationService reservationService) =>
             {
-                var result = await reservationService.UpdateAsync(id, reservationDto);
-                return result == true ? Results.Ok(result) : Results.NotFound();
+                try
+                {
+                    var result = await reservationService.UpdateAsync(id, reservationDto);
+                    return result == true ? Results.Ok(result) : Results.NotFound();
+                }
+                catch (FluentValidation.ValidationException ex)
+                {
+                    return Results.BadRequest(ex.Errors);
+                }
             }).RequireAuthorization();
     }
 }

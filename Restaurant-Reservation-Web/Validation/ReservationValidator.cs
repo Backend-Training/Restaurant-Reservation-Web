@@ -30,6 +30,6 @@ public class ReservationValidator : AbstractValidator<ReservationDto>
             .GreaterThan(0)
             .WithMessage("Party size must be at least 1.")
             .LessThanOrEqualTo(20)
-            .WithMessage("Party size cannot exceed 20 guests."); // adjust based on business rule
+            .WithMessage("Party size cannot exceed 20 guests."); 
     }
 }
