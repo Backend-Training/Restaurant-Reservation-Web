@@ -14,5 +14,11 @@ public static class EmployeeEndpoints
             var managers = await employeeService.ListAllManagers();
             return Results.Ok(managers);
         });
+
+        app.MapGet("/employees/{id:int}/average-order-amount", async (int id, IEmployeeService employeeService) =>
+        {
+            var average = await employeeService.CalculateAverageOrderAmount(id);
+            return Results.Ok(average);
+        });
     }
 }

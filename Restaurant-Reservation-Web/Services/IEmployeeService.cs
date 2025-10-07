@@ -5,5 +5,5 @@ namespace Restaurant_Reservation_Web.Services;
 public interface IEmployeeService
 {
     Task<List<EmployeeReadDto>> ListAllManagers();
-    Task<double> CalculateAverageOrderAmount(int employeeId);
+    Task<decimal> CalculateAverageOrderAmount(int employeeId);
 }

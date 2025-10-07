@@ -8,10 +8,12 @@ namespace Restaurant_Reservation_Web.Services;
 public class EmployeeService : IEmployeeService
 {
     private IRepository<Employee> _employeeRepoistory;
+    private IRepository<Order> _orderRepository;
 
-    public EmployeeService(IRepository<Employee> employeeRepoistory)
+    public EmployeeService(IRepository<Employee> employeeRepoistory, IRepository<Order> orderRepository)
     {
         _employeeRepoistory = employeeRepoistory;
+        _orderRepository = orderRepository;
     }
 
     public async Task<List<EmployeeReadDto>> ListAllManagers()
@@ -36,8 +38,10 @@ public class EmployeeService : IEmployeeService
             }).ToListAsync();
     }
 
-    public Task<double> CalculateAverageOrderAmount(int employeeId)
+    public async Task<decimal> CalculateAverageOrderAmount(int employeeId)
     {
-        throw new NotImplementedException();
+        return await _orderRepository.Entities()
+            .Where(o => o.EmployeeId == employeeId)
+            .AverageAsync(o => o.TotalAmount);
     }
 }

@@ -18,6 +18,8 @@ builder.Services.AddScoped<IRepository<Reservation>, EfRepository<Reservation>>(
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IRepository<Employee>, EfRepository<Employee>>();
 
+builder.Services.AddScoped<IRepository<Order>, EfRepository<Order>>();
+
 var app = builder.Build();
 
 app.MapReservationsEndPoints();
