@@ -22,10 +22,13 @@ builder.Services.AddScoped<IRepository<Order>, EfRepository<Order>>();
 
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
+builder.Services.AddScoped<IOrderService, OrderService>();
+
 var app = builder.Build();
 
 app.MapReservationsEndPoints();
 app.MapEmployeeEndpoints();
 app.MapCustomerEndpoints();
+app.MapOrderEndpoints();
 
 app.Run();
