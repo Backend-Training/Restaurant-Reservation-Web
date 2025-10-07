@@ -24,11 +24,14 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 builder.Services.AddScoped<IOrderService, OrderService>();
 
+builder.Services.AddScoped<IMenuItemsService, MenuItemsService>();
+
 var app = builder.Build();
 
 app.MapReservationsEndPoints();
 app.MapEmployeeEndpoints();
 app.MapCustomerEndpoints();
 app.MapOrderEndpoints();
+app.MapMenuItemsEndpoints();
 
 app.Run();
