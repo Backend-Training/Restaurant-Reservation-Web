@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Restaurant_Reservation_Web.Endpoints;
+using Restaurant_Reservation_Web.gRPC;
 using Restaurant_Reservation_Web.Services;
 using RestaurantReservation.Db;
 using RestaurantReservation.Db.Models;
@@ -56,5 +57,7 @@ app.MapCustomerEndpoints();
 app.MapOrderEndpoints();
 app.MapMenuItemsEndpoints();
 app.MapTokenEndpoints(builder.Configuration["JWT:secertKey"]);
+
+app.MapGrpcService<ReservationServiceRpc>();
 
 app.Run();
