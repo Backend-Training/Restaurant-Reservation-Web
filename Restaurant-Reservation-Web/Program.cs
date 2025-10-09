@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,6 +45,15 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddScoped<IMenuItemsService, MenuItemsService>();
+
+builder.Services.AddGrpc();
+builder.WebHost.ConfigureKestrel(options =>
+{
+    // HTTPS gRPC
+    options.ListenLocalhost(5001, o => 
+        { o.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2; });
+});
+
 
 var app = builder.Build();
 
